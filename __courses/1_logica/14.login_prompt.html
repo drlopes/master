@@ -1,0 +1,38 @@
+<meta charset="utf-8">
+
+<script type="text/javascript">
+	function newLine() {
+		document.write("<br>");
+	}
+	function print(text) {
+		document.write(text);
+	}
+
+	var registeredLogin = "admin";
+	var registeredPassword = "1234";
+
+	var attempts = 3;
+
+	while (attempts > 0) {
+
+		var userInputLogin = prompt("Digite seu login: ");
+		var userInputPassword = prompt("Digite sua senha: ");
+
+		if (userInputLogin == registeredLogin && userInputPassword == registeredPassword) {
+			alert("ACESSO PERMITIDO.");
+			break;
+		}
+		else {
+			attempts --;
+			if (attempts == 0) {
+				alert("*ACESSO NEGADO*");
+			}
+
+			else {
+				alert("*ACESSO NEGADO*");
+				alert("Login ou senha incorretos. Você tem mais " + attempts + " tentativa(s).");
+			}
+		}
+	}
+
+</script>

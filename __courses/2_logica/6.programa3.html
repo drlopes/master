@@ -1,0 +1,153 @@
+<canvas id='myCanvas'></canvas>
+
+<script type="text/javascript">
+	const myCanvas = document.getElementById('myCanvas2');
+	myCanvas.style.backgroundColor = 'lightgrey';
+	const context = myCanvas.getContext("2d");
+	myCanvas.width = window.innerWidth - 20;
+	myCanvas.height = window.innerHeight - 20;
+
+	let colorPalet = ['red', 'orange', 'yellow', 'lightgreen',
+					  'green', 'lightblue', 'blue', 'violet',
+					  'purple', 'black', 'grey', 'white'];
+	var colorPicker = 0;
+	var brushRadius = 30;
+	var isDrawing = false;
+
+	drawColorPalet();
+	drawPaper();
+	myCanvas.onmousedown = mouseDown;
+	myCanvas.onmouseup = mouseUp;
+	myCanvas.onmousemove = drawCircle;
+
+	function drawCircle (event) {
+		if (isDrawing) {
+			var mouseX = event.pageX - myCanvas.offsetLeft;
+			if (event.pageY - myCanvas.offsetTop > 90) { var mouseY = event.pageY - myCanvas.offsetTop; }
+			if (event.shiftKey && brushRadius <= 40) { brushRadius += 10; }
+			if (event.altKey && brushRadius - 5 >= 10) { brushRadius -= 5; }
+			context.fillStyle = colorPalet[colorPicker];
+			context.beginPath();
+			context.arc(mouseX, mouseY, brushRadius, 0, 2 * Math.PI);
+			context.fill();
+			drawColorPalet();
+		}
+	}
+
+	function drawColorPalet () {
+		clearScreen(0, 15, myCanvas.width, 65);
+		var tempX = myCanvas.width / 2 - 300;
+		var colorSquareRadius = 50;
+		for (var i = 0; i < 12; i++) {
+			if (i === colorPicker) {
+				context.fillStyle = 'black';
+				context.fillRect(tempX, 65, 50, 8);
+			}
+			context.fillStyle = colorPalet[i];
+			context.fillRect(tempX, 15, 50, 50);
+			tempX += 50;
+		}
+	}
+
+	function drawPaper () {
+		context.fillStyle = 'white';
+		context.fillRect(0, 80, myCanvas.width, myCanvas.height);
+	}
+
+	function mouseDown (event) {
+		if (event.pageX - myCanvas.offsetLeft >= (myCanvas.width / 2) - 300 &&
+			event.pageX - myCanvas.offsetLeft < (myCanvas.width / 2) - 250 &&
+			event.pageY >= 20 && event.pageY <= 65 + myCanvas.offsetTop) {
+			colorPicker = 0; //red
+			console.log(colorPicker);
+			drawColorPalet();
+		}
+		if (event.pageX - myCanvas.offsetLeft >= (myCanvas.width / 2) - 250 &&
+			event.pageX - myCanvas.offsetLeft < (myCanvas.width / 2) - 200 &&
+			event.pageY >= 20 && event.pageY <= 65 + myCanvas.offsetTop) {
+			colorPicker = 1; //orange
+			console.log(colorPicker);
+			drawColorPalet();
+		}
+		if (event.pageX - myCanvas.offsetLeft >= (myCanvas.width / 2) - 200 &&
+			event.pageX - myCanvas.offsetLeft < (myCanvas.width / 2) - 150 &&
+			event.pageY >= 20 && event.pageY <= 65 + myCanvas.offsetTop) {
+			colorPicker = 2; //yellow
+			console.log(colorPicker);
+			drawColorPalet();
+		}
+		if (event.pageX - myCanvas.offsetLeft >= (myCanvas.width / 2) - 150 &&
+			event.pageX - myCanvas.offsetLeft < (myCanvas.width / 2) - 100 &&
+			event.pageY >= 20 && event.pageY <= 65 + myCanvas.offsetTop) {
+			colorPicker = 3; //lightgreen
+			console.log(colorPicker);
+			drawColorPalet();
+		}
+		if (event.pageX - myCanvas.offsetLeft >= (myCanvas.width / 2) - 100 &&
+			event.pageX - myCanvas.offsetLeft < (myCanvas.width / 2) - 50 &&
+			event.pageY >= 20 && event.pageY <= 65 + myCanvas.offsetTop) {
+			colorPicker = 4; //green
+			console.log(colorPicker);
+			drawColorPalet();
+		}
+		if (event.pageX - myCanvas.offsetLeft >= (myCanvas.width / 2) - 50 &&
+			event.pageX - myCanvas.offsetLeft < (myCanvas.width / 2) &&
+			event.pageY >= 20 && event.pageY <= 65 + myCanvas.offsetTop) {
+			colorPicker = 5; //lightblue
+			console.log(colorPicker);
+			drawColorPalet();
+		}
+		if (event.pageX - myCanvas.offsetLeft >= (myCanvas.width / 2) &&
+			event.pageX - myCanvas.offsetLeft < (myCanvas.width / 2) + 50 &&
+			event.pageY >= 20 && event.pageY <= 65 + myCanvas.offsetTop) {
+			colorPicker = 6; //blue
+			console.log(colorPicker);
+			drawColorPalet();
+		}
+		if (event.pageX - myCanvas.offsetLeft >= (myCanvas.width / 2) + 50 &&
+			event.pageX - myCanvas.offsetLeft < (myCanvas.width / 2) + 100 &&
+			event.pageY >= 20 && event.pageY <= 65 + myCanvas.offsetTop) {
+			colorPicker = 7; //violet
+			console.log(colorPicker);
+			drawColorPalet();
+		}
+		if (event.pageX - myCanvas.offsetLeft >= (myCanvas.width / 2) + 100 &&
+			event.pageX - myCanvas.offsetLeft < (myCanvas.width / 2) + 150 &&
+			event.pageY >= 20 && event.pageY <= 65 + myCanvas.offsetTop) {
+			colorPicker = 8; //purple
+			console.log(colorPicker);
+			drawColorPalet();
+		}
+		if (event.pageX - myCanvas.offsetLeft >= (myCanvas.width / 2) + 150 &&
+			event.pageX - myCanvas.offsetLeft < (myCanvas.width / 2) + 200 &&
+			event.pageY >= 20 && event.pageY <= 65 + myCanvas.offsetTop) {
+			colorPicker = 9; //black
+			console.log(colorPicker);
+			drawColorPalet();
+		}
+		if (event.pageX - myCanvas.offsetLeft >= (myCanvas.width / 2) + 200 &&
+			event.pageX - myCanvas.offsetLeft < (myCanvas.width / 2) + 250 &&
+			event.pageY >= 20 && event.pageY <= 65 + myCanvas.offsetTop) {
+			colorPicker = 10; //grey
+			console.log(colorPicker);
+			drawColorPalet();
+		}
+		if (event.pageX - myCanvas.offsetLeft >= (myCanvas.width / 2) + 250 &&
+			event.pageX - myCanvas.offsetLeft < (myCanvas.width / 2) + 300 &&
+			event.pageY >= 20 && event.pageY <= 65 + myCanvas.offsetTop) {
+			colorPicker = 11; //white
+			console.log(colorPicker);
+			drawColorPalet();
+		}
+		isDrawing = true;
+	}
+
+	function mouseUp () {
+		isDrawing = false;
+	}
+
+	function clearScreen (startX, startY, endX, endY) {
+		context.clearRect(startX, startY, endX, endY);
+	}
+
+</script>

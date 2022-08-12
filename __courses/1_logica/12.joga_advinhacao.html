@@ -1,0 +1,77 @@
+<meta charset="utf-8">
+
+<script type="text/javascript">
+
+	var playerChoice = prompt("Iniciar jogo? Responda S ou N");
+	var playerWins = 0;
+	var playerLosses = 0;
+	var matches = 0;
+
+	while (playerChoice == "S" || playerChoice == "s") {
+		var seed = parseInt(prompt("Digite um número máximo: "));
+		var target = generateRandomNumber(seed);
+		var guess = parseInt(prompt("Digite um número de 1 a " + seed + ": " + target));
+
+		if (guess == target) {
+			alert("Você acertou! ");
+			playerWins++;
+			matches++;
+			playerChoice = prompt("Deseja jogar novamente? Responda S ou N");
+		}
+		else {
+			alert("Você errou! ");
+			playerLosses++;
+			matches++;
+			if (guess < target) {
+				alert("O número correto era maior que seu palpite. ");
+				playerChoice = prompt("Deseja jogar novamente? Responda S ou N");
+			}
+			else {
+				alert("O número correto era menor que seu palpite. ");
+				playerChoice = prompt("Deseja jogar novamente? Responda S ou N");
+			}
+		}
+	}
+
+	alert("OBRIGADO POR JOGAR"); 
+	if (matches > 0) {
+		var playerScore = getFinalScore(playerWins, playerLosses);
+		print("<big> VITÓRIAS: " + playerWins + " | DERROTAS: " + playerLosses + "</big>");
+		newLine();
+		print("Sua pontuação final foi de " + playerScore + " pontos!");
+	}
+
+	function newLine() {
+		document.write("<br><br>");
+	}
+
+	function print(text) {
+		document.write(text);
+	}
+
+	function generateRandomNumber(n) {
+		number = Math.round(Math.random() * n);
+		if (number == 0) {
+			return number++;
+		}
+		else {
+			if (number >= 1 && number <= n) {
+				return number;
+			}
+			else {
+				generateRandomNumber(n);
+			}
+		}
+	}
+
+	function getFinalScore(win, loss) {
+		var finalScore = (win * 5) - (loss * 3);
+		if (finalScore >= 0) {
+			return finalScore;
+		}
+		else {
+			return 0;
+		}
+	}
+
+</script>

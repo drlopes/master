@@ -1,0 +1,24 @@
+<meta charset="utf-8">
+
+<script type="text/javascript">
+	function newLine() {
+		document.write("<br>");
+	}
+	function print(text) {
+		document.write(text);
+	}
+
+	var counter = 30;
+
+	while(counter <= 40) {
+		if (counter == 33 || counter == 37) {
+			counter = counter + 1;
+		}
+		else {
+			print(counter);
+			newLine();
+			counter = counter + 1;
+		}
+	}
+
+</script>

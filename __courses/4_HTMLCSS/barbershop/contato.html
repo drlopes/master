@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+
+<html lang="pt-br">
+    <head>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="styles/reset.css">
+        <link rel="stylesheet" href="styles/header_footer.css">
+        <link rel="stylesheet" href="styles/style.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Domine&display=swap" rel="stylesheet">
+        <title>Barbearia | Contato</title>
+    </head>
+    <body>
+        <nav class="navigator">
+            <ul>
+                <li><a href="home.html">Home</a></li>
+                <li><a href="products.html">Produtos</a></li>
+                <li><a href="contato.html">Contato</a></li>
+            </ul>
+        </nav>
+        <header>
+            <div class="headerContent">
+                <h1 class="logo"><a href="home.html"><img src="images/logo.png" alt="logo"></a></h1>
+            </div>
+        </header>
+        <main class="content">
+            <table class="workingHours">
+                <thead>
+                    <tr>
+                        <th id="tableTitle" colspan="2">Funcionamento</th>
+                    </tr>
+                    <tr>
+                        <th>Dia</th>
+                        <th>Horário</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Segunda</td>
+                        <td>08h às 20h</td>
+                    </tr>
+                    <tr>
+                        <td>Quarta</td>
+                        <td>08h às 20h</td>
+                    </tr>
+                    <tr>
+                        <td id="bottomLeft">Sexta</td>
+                        <td id="bottomRight">08h às 18h</td>
+                    </tr>
+                </tbody>
+            </table>
+            <form>
+                <fieldset class="personalInfo">
+                    <label for="fullName">Nome e sobrenome</label>
+                    <input type="text" id="fullName" name="fullName" placeholder='Digite seu nome' required>
+                    <label for="emailAddres">E-mail</label>
+                    <input type="email" id="emailAddres" name="emailAddres" placeholder="email@domínio.com" required>
+                    <label for="phoneNumber">Telefone</label>
+                    <input type="tel" name="phoneNumber" id="phoneNumber" placeholder="(xx) XXXX-XXX" required>
+                </fieldset>
+                <fieldset class="messageBox">
+                    <label for="messageBox">Mensagem</label>
+                    <textarea name="message" id="messageBox" rows="8" cols="10" placeholder="Mensagem..."></textarea>
+                </fieldset>
+                <fieldset class="contactPreference">
+                    <legend>Como prefere o nosso contato?</legend>
+                    <div class="WhatsApp">
+                        <input type="radio" name="contactBy" value="WhatsApp" id="contactByWhatsApp" checked>
+                        <label for="contactByWhatsApp">WhatsApp</label>
+                    </div>
+                    <div class="Mail">
+                        <input type="radio" name="contactBy" value="Mail" id='contactByMail'>
+                        <label for="contactByMail">Email</label>
+                    </div>
+                    <div class="Phone">
+                        <input type="radio" name="contactBy" value="Phone" id="contactByPhone">
+                        <label for="contactByPhone">Telefone</label>
+                    </div>
+                </fieldset>
+                <fieldset class="timeOfDay">
+                    <label for="timeOfDayDropList">Qual horário prefere ser atendido?</label>
+                    <select class="timeOfDayDropList" name="timeOfDayDropList" id="timeOfDayDropList">
+                        <option value="Manhã">Manhã</option>
+                        <option value="Tarde">Tarde</option>
+                        <option value="Noite">Noite</option>
+                    </select>
+                </fieldset>
+                <fieldset class="mailFeed">
+                    <input type="checkbox" name="mailFeed" id="mailFeed" checked>
+                    <label for="mailFeed">Gostaria de receber nossos e-mails promocionais?</label>
+                </fieldset>
+                <input type="submit" name="submitForm" value="Enviar" class="submitForm">
+            </form>
+        </main>
+        <div class="footer">
+            <footer>
+                <img src="images/logo-branco.png" alt="Logo">
+                <p class="copyrightText">&copy;Copyright: Alura 2022</p>
+            </footer>
+        </div>
+    </body>
+</html>

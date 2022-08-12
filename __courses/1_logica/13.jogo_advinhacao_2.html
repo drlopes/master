@@ -1,0 +1,67 @@
+<meta charset="utf-8">
+
+<h1>GUESSING GAME</h1>
+<h5>Lógica De Programação I</h5>
+<p1> Type a number from 0 to 10 and test your luck. </p1><br><br>
+<p1>Guess.</p1><br>
+<input type="text" name="tagGuess" placeholder="Your guess" autofocus><br>
+<button name="buttonSubmit">Submit</button>
+
+<script type="text/javascript">
+
+	var startGame = document.querySelector("button");
+	var guess = document.querySelector("input");
+	startGame.onclick = playGame;
+
+	function playGame() {
+		var secretNumber = getRandomList(1, 10, 3);
+		console.log(secretNumber);
+		var onWin = false;
+
+		for (var i = 0; i < 3; i++) {
+			if (guess.value == secretNumber[i]) {
+			alert("Você acertou!");
+			onWin = true;
+			break;
+			}
+		}
+		guess.value = "";
+		guess.focus();
+		if (onWin == false) {
+			alert("Você errou!");
+		}
+	}
+
+	function getRandomList(min, max, size) {
+		var list = [];
+		if (min >= 1 && max >=1 && size >= 1) {
+			for (var i = 0; i < size; i++) {
+				var j = Math.round(Math.random() * max);
+				if (j >= min && j <= max) {
+					var check = 0;
+					for (var k = 0; k < list.length; k++) {
+						if (j == list[k]) {
+							check++;
+						}
+					}
+					if (check == 0) {
+						list.push(j);
+					}
+					else {
+						i--;
+						continue;
+					}
+				}
+				else {
+					i--;
+					continue;
+				}
+			}
+			return list;
+		}
+		else {
+			return list;
+		}
+	}
+
+</script>

@@ -1,0 +1,25 @@
+<canvas width = "600" height="600"></canvas>
+
+<script type="text/javascript">
+	var canvas = document.querySelector("canvas");
+	var brush = canvas.getContext("2d");
+
+	//head
+	brush.fillStyle = "darkgreen";
+	brush.fillRect(0, 0, canvas.width, canvas.height);
+
+	//Right eye
+	brush.fillStyle = "black";
+	brush.fillRect(80, 80, 150, 150);
+
+	//Left eye
+	brush.fillStyle = "black";
+	brush.fillRect(370, 80, 150, 150);
+
+	//Mouth
+	brush.fillStyle = "black";
+	brush.fillRect(230, 230, 140, 100);
+	brush.fillRect(155, 310, 290, 150);
+	brush.fillRect(155, 460, 75, 200);
+	brush.fillRect(370, 460, 75, 200);
+</script>

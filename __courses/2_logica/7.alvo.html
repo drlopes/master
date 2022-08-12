@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+    <canvas width='900' height='600'></canvas>
+    <meta charset='utf-8'>
+</html>
+
+<script type='text/javascript'>
+    const canvas = document.querySelector('canvas');
+    const brush = canvas.getContext('2d');
+    canvas.width = window.innerWidth - 20;
+    canvas.height = window.innerHeight - 20;
+    canvas.style.backgroundColor = 'lightgrey';
+    const bullseyeRadius = 10;
+    var bullseyeCoord = [canvas.width / 2, canvas.height / 2];
+    var score = 0;
+    var misses = 0;
+
+    updateScreen();
+    drawBullseye();
+    setInterval(updateScreen, 900);
+    canvas.onclick = hitDetect;
+
+    function drawCircle (X, Y, radius, color) {
+        brush.fillStyle = color;
+        brush.beginPath();
+        brush.arc(X, Y, radius, 0, 2 * Math.PI);
+        brush.fill();
+    }
+
+    function drawBullseye () {
+        drawCircle(bullseyeCoord[0], bullseyeCoord[1], bullseyeRadius * 3, 'red');
+        drawCircle(bullseyeCoord[0], bullseyeCoord[1], bullseyeRadius * 2, 'white');
+        drawCircle(bullseyeCoord[0], bullseyeCoord[1], bullseyeRadius, 'red');
+    }
+
+    function updateX () {
+        var newX = Math.round(Math.random() * canvas.width);
+        if (newX - (bullseyeRadius * 3) - canvas.offsetLeft > 0 && 
+            newX + (bullseyeRadius * 3) < canvas.width) {
+            bullseyeCoord[0] = newX;} else { updateX() }
+    }
+
+    function updateY () {
+        var newY = Math.round(Math.random() * canvas.height);
+        if (newY - (bullseyeRadius * 3) - canvas.offsetTop > 35 && 
+            newY + (bullseyeRadius * 3) < canvas.height) {
+            bullseyeCoord[1] = newY;} else { updateY() }
+    }
+
+
+    function hitDetect (event) {
+        var X = event.pageX - canvas.offsetLeft;
+        var Y = event.pageY - canvas.offsetTop;
+        if (X < bullseyeCoord[0] + bullseyeRadius && 
+            X > bullseyeCoord[0] - bullseyeRadius && 
+            Y < bullseyeCoord[1] + bullseyeRadius && 
+            Y > bullseyeCoord[1] - bullseyeRadius) {
+            score ++;} else { misses++ }
+    }
+
+    function clearScreen () {
+        brush.clearRect(0, 0, canvas.width, canvas.height);
+    }
+
+    function showScore () {
+        brush.fillStyle = 'black';
+        brush.fillRect(0, 0, canvas.width, 35);
+        brush.fillStyle = 'white';
+        brush.font = '30px monospace, Arial';
+        brush.fillText('Hits: ' + score, 70, 27);
+        brush.fillStyle = 'white';
+        brush.font = '30px monospace, Arial';
+        brush.fillText('Misses: ' + misses, canvas.width - 220, 27);
+    }
+
+    function updateScreen () {
+        clearScreen();
+        updateX();
+        updateY();
+        showScore();
+        drawBullseye();
+    }
+</script>

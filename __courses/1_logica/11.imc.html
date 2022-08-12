@@ -1,0 +1,37 @@
+<meta charset="utf-8">
+
+<script type="text/javascript">
+	
+	function newLine() {
+		document.write("<br><hr>");
+	}
+	function print(text) {
+		document.write("<big>" + text + "</big>" );
+		newLine();
+	}
+	function calculaIMC(peso, altura) {
+		var imc = Math.round(peso / (altura ** 2));
+		return imc;
+	}
+
+	var nome = prompt("Qual seu nome? ");
+	var peso = parseInt(prompt(nome + ", informe seu peso: "));
+	var altura = prompt(nome + ", informe sua altura: ");
+	var imc = calculaIMC(peso, altura);
+
+	
+	print(nome + ", o seu IMC é " + imc + ".");
+
+	if (imc <= 18.5) {
+		print("Você está abaixo do seu peso ideal.");
+	}
+
+	if (imc <= 35) {
+		print("Seu IMC está bom.");
+	}
+
+	else {
+		print("Você está obeso.");
+	}
+
+</script>

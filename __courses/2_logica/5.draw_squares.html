@@ -1,0 +1,70 @@
+<canvas width = "380" height = "280">
+	
+</canvas>
+
+<script type="text/javascript">
+
+	//var series2015 = [50, 25, 20, 5];
+	//var series2016 = [65, 20, 13, 2];
+	//var colors = ['blue', 'green', 'yellow', 'red'];
+	drawScreen(10, 10, "green", "black", 380, 280);
+	//drawBarGraph(1, 30, series2015, colors, "Série 2015");
+	//drawBarGraph(160, 30, series2016, colors, "Série 2016");
+	//drawMultiplePixels(0, 0, 50, 50, "white", "black", 10);
+	//drawMultiplePixels(0, 0, 50, 50, "green", "black", 4);
+
+
+	function drawScreen(pixelWidth, pixelHeight, fillColor, strokeColor, canvasWidth, canvasHeight) {
+
+		var pixelCount = Math.round((canvasWidth * canvasHeight) / (pixelWidth * pixelHeight));
+		var pixelPerLine = canvasWidth / pixelWidth;
+		var columns = canvasHeight / pixelHeight;
+		var currentY = 0;
+		for (var i = 0; i < columns; i++) {
+			drawMultiplePixels(0, currentY, pixelWidth, pixelHeight, fillColor, strokeColor, pixelPerLine);
+			currentY += pixelHeight;
+		}
+	}
+
+	function drawMultiplePixels(x, y, pixelWidth, pixelHeight, fillColor, strokeColor, ammount) {
+
+		var currentX = 0;
+		for (var i = 0; i < ammount; i++) {
+			drawPixel(currentX, y, pixelWidth, pixelHeight, fillColor, strokeColor);
+			currentX += pixelHeight;
+		}
+	}
+
+	function drawPixel(x, y, pixelWidth, pixelHeight, fillColor, strokeColor) {
+		
+		var canvas = document.querySelector("canvas");
+		var brush = canvas.getContext("2d");
+		brush.strokeStyle = strokeColor;
+		brush.fillStyle = fillColor;
+		brush.fillRect(x, y, pixelWidth, pixelHeight);
+		brush.strokeRect(x, y, pixelWidth, pixelHeight);
+	}
+
+	function drawText(text, x, y, fontName, fontSize, fontColor) {
+
+        var canvas = document.querySelector("canvas");
+        var brush = canvas.getContext("2d");
+        brush.font = fontSize + "px " + fontName; 
+        brush.fillStyle = fontColor;
+        brush.fillText(text, x, y);
+        // Complete "x.font" format is "Xpx FONT" where X is an INT and FONT is the font's name
+    }
+
+    function drawBarGraph(x, y, series, colors, text) {
+
+    	var seriesF = series;
+    	var colorsF = colors;
+    	drawText(text, x, y, "Times", 30, "black");
+    	var currentY = y + 30;
+    	for (var i = 0; i < series.length; i++) {
+    		drawPixel(x + 25, currentY, 80, seriesF[i] * 3, colorsF[i], "black");
+    		currentY += seriesF[i] * 3;
+    	}
+    }
+
+</script>

@@ -1,0 +1,23 @@
+<meta charset="utf-8">
+
+<script type="text/javascript">
+
+	var familyCount = parseInt(prompt("Quantos familiares? "));
+	var totalIdades = 0;
+	var ageAverage = 0;
+
+	for (var i = 1; i <= familyCount; i++) {
+		totalIdades = totalIdades + parseInt(prompt("Qual a idade da " + i + "° pessoa?"));
+	}
+
+	ageAverage = totalIdades / familyCount;
+	print("A idade média da família é " + ageAverage + " anos.");
+
+	function newLine() {
+		document.write("<br>");
+	}
+	function print(text) {
+		document.write(text);
+	}
+
+</script>

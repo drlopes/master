@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+	<meta charset="utf-8">
+	<canvas id="myCanvas"></canvas>
+</html>
+
+<script type="text/javascript">
+	var myCanvas = document.getElementById('myCanvas');
+	myCanvas.width = window.innerWidth - 20;
+	myCanvas.height = window.innerHeight - 20;
+	var brush = myCanvas.getContext('2d');
+	var screenWidth = myCanvas.width;
+	var screenHeight = myCanvas.height;
+	var hits = 0;
+	var misses = 0;
+	const bullseye = {
+		radius: 25,
+		color: ['red', 'white'],
+		X: screenWidth / 2,
+		Y: screenHeight / 2,
+		speedX: 4,
+		speedY: 2
+	};
+
+	myCanvas.onclick = hitDetect;
+	setInterval(updateScreen, 10);
+
+	function drawCircle (X, Y, radius, color) {
+		brush.beginPath();
+		brush.fillStyle = color;
+		brush.arc(X, Y, radius, 0, 2 * Math.PI);
+		brush.fill();
+	}
+
+	function clearScreen () {
+		brush.clearRect(0, 0, screenWidth, screenHeight);
+		brush.fillStyle = 'black';
+		brush.fillRect(0, 0, screenWidth, screenHeight);
+		brush.fillStyle = 'white';
+		brush.fillRect(2, 40, screenWidth - 4, screenHeight - 42);
+	}
+
+	function updateScreen () {
+		clearScreen();
+		showScore();
+		bullseyeMovement();
+		drawCircle(bullseye.X, bullseye.Y, bullseye.radius * 3, bullseye.color[0]);
+		drawCircle(bullseye.X, bullseye.Y, bullseye.radius * 2, bullseye.color[1]);
+		drawCircle(bullseye.X, bullseye.Y, bullseye.radius, bullseye.color[0]);
+	}
+
+	function bullseyeMovement () {
+		if (bullseye.X - bullseye.radius * 3 >= 0 &&
+			bullseye.X + bullseye.radius * 3 <= screenWidth) {
+			bullseye.X += bullseye.speedX;
+		}
+		else {
+			bullseye.speedX = -1 * bullseye.speedX;
+			bullseye.X += bullseye.speedX;
+		}
+		if (bullseye.Y - bullseye.radius * 3 > 40 &&
+			bullseye.Y + bullseye.radius * 3 < screenHeight) {
+			bullseye.Y += bullseye.speedY;
+		}
+		else {
+			bullseye.speedY = -1 * bullseye.speedY;
+			bullseye.Y += bullseye.speedY;
+		}
+	}
+
+	function hitDetect (element) {
+		var X = element.pageX - myCanvas.offsetLeft;
+		var Y = element.pageY - myCanvas.offsetTop;
+		if (X <= bullseye.X + bullseye.radius && X >= bullseye.X - bullseye.radius &&
+			Y <= bullseye.Y + bullseye.radius && Y >= bullseye.Y - bullseye.radius) {
+			hits++;
+			if (bullseye.speedX > 0) {
+				if (bullseye.speedX - 1 >= 2) {
+					bullseye.speedX -= 1
+				}
+			} else { bullseye.speedX += 1 }
+		} else { 
+			misses++;
+			if (bullseye.speedX > 0) {
+				bullseye.speedX += 0.2;
+			} else {
+				if (bullseye.speedX - 0.2 < 0) {
+					bullseye.speedX -= 0.2;
+				}
+			}
+		}
+	}
+
+	function showScore () {
+		brush.fillStyle = 'white';
+        brush.font = '30px monospace, Arial';
+        brush.fillText('Acertos: ' + hits, 70, 27);
+        brush.fillStyle = 'white';
+        brush.font = '30px monospace, Arial';
+        brush.fillText('Erros: ' + misses, screenWidth - 220, 27);
+	}
+</script>

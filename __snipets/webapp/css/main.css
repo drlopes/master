@@ -1,0 +1,26 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap');
+
+/*
+  Reseting some initial values and setting defaults for
+  background color, font style and text decoration, as well as
+  making elements, generally, unselectable.
+*/
+
+:root{
+  --navCyan: rgb(141, 222, 233);
+  --header: #1f1f44;
+  --navigator: #0b0b18;
+  --stdBackground: rgb(19, 19, 19);
+}
+
+* {
+  text-decoration: none;
+  user-select: none;
+}
+
+body {
+    background: var(--stdBackground);
+    color: white;
+    font-family: 'Roboto', sans-serif;
+    user-select: none;
+}

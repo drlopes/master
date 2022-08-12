@@ -1,0 +1,34 @@
+<meta charset="utf-8">
+
+<script type="text/javascript">
+	
+	function newLine() {
+		document.write("<br>");
+	}
+	function print(text) {
+		document.write(text);
+	}
+
+	var win = parseInt(prompt("N° de vitórias: "));
+	var loss = parseInt(prompt("N° de derrotas: "));
+	var draw = parseInt(prompt("N° de empates: "));
+	var points = (win * 3) + draw;
+
+	print("O seu time tem " + points + " pontos! ");
+	newLine();
+
+	if (points > 5) {
+		if (points >= 8) {
+			print("Seu time vai ganhar o campeonato!");
+		}
+		else {
+			print("Ainda há o que melhorar.");
+		}
+	}
+
+	else {
+		print("Seu time está indo mal...");
+		newLine();
+	}
+
+</script>

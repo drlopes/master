@@ -1,0 +1,32 @@
+<meta charset="utf-8">
+
+<h3>Alcool ou Gasolina?</h3>
+
+<script type="text/javascript">
+
+	function pula_linha() {
+		document.write("<br>");
+	}
+
+	function print(string) {
+		document.write(string);
+	}
+
+	var tanque = 40; //Litros
+	var caminhoComGasolina = 480; //Km
+	var consumoDeGasolina = 0; //Litros
+	var caminhoComAlcool = 300; //Km
+	var consumoDeAlcool = 0; //Litros
+
+
+	consumoDeGasolina = caminhoComGasolina / tanque;
+	print("O consumo de gasolina foi de " +
+	 consumoDeGasolina + " litros por Km.");
+	pula_linha();
+
+	consumoDeAlcool = caminhoComAlcool / tanque;
+	print("O consumo de alcool foi de " +
+	 consumoDeAlcool + " litros por Km.");
+	pula_linha();
+
+</script>

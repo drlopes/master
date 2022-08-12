@@ -1,0 +1,60 @@
+<meta charset="utf-8">
+<canvas id='myCanvas'></canvas>
+
+<script type="text/javascript">
+	const myCanvas = document.getElementById('myCanvas');
+	const context = myCanvas.getContext('2d');
+	myCanvas.width = window.innerWidth - 20;
+	myCanvas.height = window.innerHeight - 20;
+	myCanvas.style.backgroundColor = 'black';
+	const circle = {
+		xPos: myCanvas.width / 2,
+		yPos: myCanvas.height / 2,
+		minRadius: 20,
+		maxRadius: 30,
+		drawRadius: 20,
+		color: 'yellow',
+		inflation: true,
+		movementSpeed: 10
+	};
+
+	//key codes:
+	const arrowUp = 38;
+	const arrowRight = 39;
+	const arrowDown = 40;
+	const arrowLeft = 37;
+
+	setInterval(animateCircle, 20);
+	document.onkeydown = getKeyboardInput;
+
+	function drawCircle (X, Y, radius, color) {
+		context.beginPath();
+		context.fillStyle = color;
+		context.arc(X, Y, radius, 0, 2 * Math.PI);
+		context.fill();
+	}
+
+	function updateCircleRadius () {
+		if (circle.drawRadius === circle.minRadius) { circle.inflation = true }
+		if (circle.drawRadius === circle.maxRadius) { circle.inflation = false }
+		if (circle.inflation) { circle.drawRadius++ } else { circle.drawRadius-- }
+	}
+
+	function clearScreen () {
+		context.clearRect(0, 0, myCanvas.width, myCanvas.height);
+	}
+
+	function animateCircle () {
+		clearScreen();
+		drawCircle(circle.xPos, circle.yPos, circle.drawRadius, circle.color);
+		updateCircleRadius();
+	}
+
+	function getKeyboardInput (event) {
+		let keyCode = event.keyCode;
+		if (keyCode === arrowUp) { circle.yPos -= circle.movementSpeed };
+		if (keyCode === arrowRight) { circle.xPos += circle.movementSpeed };
+		if (keyCode === arrowDown) { circle.yPos += circle.movementSpeed };
+		if (keyCode === arrowLeft) { circle.xPos -= circle.movementSpeed };
+	}
+</script>

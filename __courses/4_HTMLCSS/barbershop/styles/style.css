@@ -1,0 +1,230 @@
+/* General Style */
+.content {
+    width: 940px;
+    margin: 20px auto 0 auto;
+    color: white;
+    font-family: Domine, serif;
+}
+body {
+    background: linear-gradient(black 75%, green);
+}
+
+@media screen and (max-width: 480px) {
+    .content {
+        width:auto;
+        padding: 0 20px;
+    }
+    .content p {
+    font-size: 15px;
+    }
+    .content h1, .content h2 {
+        font-size: 20px;
+    }
+    .mission {
+        font-size: 20px;
+    }
+    .presentationText img + p {
+        margin: 0 auto;
+    }
+    .map h3 {
+        font-size: 20px
+    }
+    .benefits h4, .benefits li {
+        font-size: 20px;
+    }
+    .benefitsList {
+        padding-top: 0;
+    }
+    .productsList,
+    .personalInfo input,
+    .messageBox textarea {
+        width: auto;
+    }
+    .game iframe {
+        width: auto;
+    }
+    .productType, .productPrice {
+        font-size: 50px;
+    }
+}
+
+/*******************************************/
+
+/* Home page style */
+.presentationText { text-align: center; font-size: 25px; }
+.presentationText p { margin: 40px auto; }
+.mission { font-size: 30px; padding: 20px auto; }
+#missionStatement { font-weight: bold; font-style: italic; color: green; }
+.benefits { display: block; margin: 20px auto 200px auto; }
+.benefit { font-size: 30px; padding-bottom: 25px; }
+.benefitsList {margin: auto;}
+
+.about {
+    text-align: center;
+    font-size: 35px;
+    font-weight: bold;
+    padding: 20px;
+    clear: both;
+}
+
+.imgBenefits img {
+    width: 50%;
+    display: inline;
+    float: right;
+    margin: auto;
+    border-radius: 20px;
+    transition: 0.1s all;
+    border: 2px solid green;
+}
+
+.utensilios {
+    width: 150px;
+    float: left;
+    border: 2px solid green;
+    border-radius: 10px;
+    margin: 0 20px 20px 0;
+}
+
+.map p {
+    margin-bottom: 20px;
+}
+
+.benefit:before {
+    content: '🟄';
+}
+
+/*******************************************/
+
+/* Contact page style */
+.mailFeed label { font-size: 20px; }
+.mailFeed input { margin-top: 20px; }
+.contactPreference { margin-top: 20px; font-size: 20px; }
+.timeOfDay select { margin: 10px auto; padding: 5px; }
+.personalInfo { margin-top: 50px; }
+
+.imgContacts img {
+    width: 50%;
+    display: inline;
+    float: right;
+    margin: 230px auto;
+}
+
+.personalInfo input, .messageBox textarea {
+    display: block;
+    margin-bottom: 20px;
+    padding: 10px 25px;
+    width: 400px;
+    border-radius: 5px;
+}
+
+.personalInfo label, .personalInfo p,
+.messageBox label {
+    display: block;
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.contactPreference .WhatsApp,
+.contactPreference .Mail,
+.contactPreference .Phone {
+    display: block;
+    margin: 10px auto;
+    font-size: 18px;
+}
+
+.submitForm {
+    width: 40%;
+    margin: 40px auto;
+    padding: 15px;
+    color: black;
+    font-size: 20px;
+    font-weight: bold;
+    background: rgb(255, 255, 255);
+    border-radius: 8px;
+    transition: 0.1s all;
+}
+
+.submitForm:hover {
+    background: rgb(10, 90, 10);
+    transform: scale(1.1);
+    color: white;
+    cursor: pointer;
+}
+
+.timeOfDay label {
+    display: block;
+    font-size: 20px;
+    margin: 20px auto 5px auto;
+}
+
+.workingHours {
+    width: 30%;
+    display: table;
+    margin: 20px auto;
+    float: right;
+}
+
+.workingHours th {
+    background: url('../images/banner-2.jpg');
+    font-size: 30px;
+    font-weight: bolder;
+    color: white;
+    padding: 10px;
+}
+
+.workingHours td {
+    font-size: 20px;
+    font-weight: bold;
+    background: white;
+    text-align: center;
+    padding: 10px;
+    color: black;
+}
+
+#tableTitle {
+    border-radius: 10px 10px 0 0;
+}
+/*******************************************/
+
+/* Products page style */
+.productsList { width: 940px; margin: 50px auto 20px auto; }
+.productType { font-size: 30px; font-weight: bold; }
+.product:active { border-color: lightblue; }
+.productDescription { font-size: 18px; }
+
+.product:hover {
+    transform: scale(1.15);
+    opacity: 90%;
+    box-shadow: 5px 5px 5px green;
+}
+
+.product {
+    background: white;
+    color: black;
+    display: inline-block;
+    text-align: center;
+    padding: 30px 20px;
+    width: 30%;
+    margin: 100px 1.5% 30px 1.5%;
+    box-sizing: border-box;
+    border: 2px solid green;
+    border-radius: 20px;
+    transition: 0.2s all;
+    opacity: 80%;
+}
+
+.product img {
+    margin: auto;
+}
+
+.productPrice {
+    font-size: 22px;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+.game iframe {
+    display: block;
+    margin: 20px auto 90px auto;
+    border: 2px solid white;
+}

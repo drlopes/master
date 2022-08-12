@@ -1,0 +1,128 @@
+:root {
+  --main-background: #080808;
+  --card-color: #080808;
+}
+
+.body {
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  min-height: 100vh;
+  width: 90vw;
+  user-select: none;
+
+  background-color: var(--main-background);
+}
+
+.stack-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.stack-container::-webkit-scrollbar {
+  margin: 1em;
+  background-color: #202020;
+  height: 8px;
+}
+
+.stack-container::-webkit-scrollbar-thumb {
+  background-color: rgb(150, 50, 0);
+  border-radius: 1em;
+}
+
+.card {
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  position: relative;
+  color: white;
+  padding: 1em 2em;
+
+  border: 8px solid rgb(150, 50, 0);
+  background-color: var(--card-color);
+  border-radius: 16px;
+  transition: .2s;
+}
+
+.card-header h1 {
+  font-size: 18px;
+  margin: 0;
+}
+
+.card-header::after {
+  content: " ";
+  position: absolute;
+  top: 90px;
+  left: 30px;
+  width: 150px;
+  height: 6px;
+  background-color: rgb(150, 50, 0);
+}
+
+.card-main {
+  line-height: 1.5;
+  color: #DDD;
+  max-width: 30ch;
+}
+
+.card-footer {
+  font-size: 10px;
+  color: #FFF;
+}
+
+.card .card-footer {
+  position: absolute;
+  bottom: 0;
+}
+
+.card:not(:first-child) {
+  margin-top: -300px;
+  box-shadow: -5px 0 8px #000;
+}
+
+.card:hover~.card {
+  transform: translateY(300px);
+}
+
+@media only screen and (min-width: 500px) {
+  .body {
+    flex-direction: column;
+  }
+
+  .stack-container {
+      padding: 3em;
+      flex-direction: row;
+      overflow-x: scroll;
+  }
+
+  .card {
+    width: 230px;
+    min-height: 380px;
+    padding: 2em;
+  }
+
+  .card-header {
+    font-size: 25px;
+    margin: 0;
+  }
+
+  .card-header::after {
+    top: 70px;
+    left: 30px;
+    width: 150px;
+  }
+
+  .card:not(:first-child) {
+    margin-top: 0px;
+    margin-left: -240px;
+    box-shadow: -5px 0 8px #000;
+  }
+
+  .card:hover {
+    transform: translateY(-2em);
+  }
+
+  .card:hover~.card {
+    transform: translateX(220px);
+  }
+}
