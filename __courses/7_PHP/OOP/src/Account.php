@@ -1,11 +1,9 @@
 <?php
 
-include_once 'Holder.php';
-
 class Account
 {
   private static int $activeAccounts = 0;
-  private readonly Holder $holder;
+  public readonly Holder $holder;
   private int|float $balance = 0;
 
   public function __construct(Holder $holder)
@@ -40,36 +38,6 @@ class Account
   public function getBalance():float
   {
     return $this->balance;
-  }
-
-  public function getFullName():string
-  {
-    return $this->holder->getName();
-  }
-
-  public function getCPF():string
-  {
-    return $this->holder->getCPF();
-  }
-
-  public function getCity():string
-  {
-    return $this->holder->getCity();
-  }
-
-  public function getNeighborhood():string
-  {
-    return $this->holder->getNeighborhood();
-  }
-
-  public function getStreet():string
-  {
-    return $this->holder->getStreet();
-  }
-
-  public function getNumber():string
-  {
-    return $this->holder->getNumber();
   }
 
   static function getActiveAccounts():int

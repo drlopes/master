@@ -1,8 +1,7 @@
 <?php
 
-require_once 'src/CPF.php';
-require_once 'src/Address.php';
 require_once 'src/Holder.php';
+require_once 'src/Employee.php';
 require_once 'src/Account.php';
 
 $holder = new Holder(
@@ -24,13 +23,13 @@ $account->deposit(1500);
   </head>
   <body>
 
-    <hr> Name: <?= htmlentities($account->getFullName()) ?> </hr>
+    <hr> Name: <?= htmlentities($account->holder->getFullName()) ?> </hr>
     <hr> Balance: $ <?= htmlentities($account->getBalance()) ?> </hr>
-    <hr> CPF: <?= htmlentities($account->getCPF()) ?> </hr>
-    <hr> City: <?= htmlentities($account->getCity()) ?> </hr>
-    <hr> Neighborhood: <?= htmlentities($account->getNeighborhood()) ?> </hr>
-    <hr> Street: <?= htmlentities($account->getStreet()) ?> </hr>
-    <hr> Number: <?= htmlentities($account->getNumber()) ?> </hr>
+    <hr> CPF: <?= htmlentities($account->holder->getCPF()) ?> </hr>
+    <hr> City: <?= htmlentities($account->holder->getCity()) ?> </hr>
+    <hr> Neighborhood: <?= htmlentities($account->holder->getNeighborhood()) ?> </hr>
+    <hr> Street: <?= htmlentities($account->holder->getStreet()) ?> </hr>
+    <hr> Number: <?= htmlentities($account->holder->getNumber()) ?> </hr>
     <hr> ID: <?= Account::getActiveAccounts();  ?> </hr>
 
   </body>
