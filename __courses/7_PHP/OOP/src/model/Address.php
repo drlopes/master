@@ -2,10 +2,10 @@
 
 class Address
 {
-  private readonly string $city;
-  private readonly string $neighborhood;
-  private readonly string $street;
-  private readonly string $number;
+  private string $city;
+  private string $neighborhood;
+  private string $street;
+  private string $number;
 
   public function __construct(
     string $city,

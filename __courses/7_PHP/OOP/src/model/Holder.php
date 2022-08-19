@@ -7,9 +7,7 @@ class Holder extends Person
 
   public function __construct(string $name, CPF $cpf, Address $address)
   {
-    $this->name = $this->validateName($name);
-    $this->cpf = $cpf;
-    $this->address = $address;
+    parent::__construct($name, $cpf, $address);
   }
 
 }

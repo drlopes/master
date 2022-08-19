@@ -9,6 +9,13 @@ class Person
   protected CPF $cpf;
   protected Address $address;
 
+  protected function __construct(string $name, CPF $cpf, Address $address)
+  {
+    $this->name = $this->validateName($name);
+    $this->cpf = $cpf;
+    $this->address = $address;
+  }
+
   public function getFullName():string
   {
     return $this->name;

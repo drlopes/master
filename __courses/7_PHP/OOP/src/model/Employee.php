@@ -8,9 +8,7 @@ class Employee extends Person
 
   public function __construct(string $name, CPF $cpf, Address $address, string $role)
   {
-    $this->name = $this->validateName($name);
-    $this->cpf = $cpf;
-    $this->address = $address;
+    parent::__construct($name, $cpf, $address);
     $this->role = $role;
   }
 

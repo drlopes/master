@@ -1,8 +1,8 @@
 <?php
 
-require_once 'src/Holder.php';
-require_once 'src/Employee.php';
-require_once 'src/Account.php';
+require_once 'src/model/Holder.php';
+require_once 'src/model/Employee.php';
+require_once 'src/model/Account.php';
 
 $holder = new Holder(
   'Jane Doe',
@@ -10,7 +10,7 @@ $holder = new Holder(
   new Address('NY', 'Brooklyn', 'Madison st.', '310')
 );
 $account = new Account($holder);
-$account->deposit(1500);
+$account->deposit(18500);
 
 ?>
 
