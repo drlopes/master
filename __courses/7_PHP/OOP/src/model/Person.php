@@ -1,9 +1,8 @@
 <?php
 
-require_once 'CPF.php';
-require_once 'Address.php';
+namespace Alura\Bank\Model;
 
-class Person
+abstract class Person
 {
   protected string $name;
   protected CPF $cpf;
@@ -41,9 +40,9 @@ class Person
     return $this->address->getStreet();
   }
 
-  public function getNumber():string
+  public function getHouseNumber():string
   {
-    return $this->address->getNumber();
+    return $this->address->getHouseNumber();
   }
 
   protected function validateName(string $name):string

@@ -1,16 +1,27 @@
 <?php
 
-require_once 'src/model/Holder.php';
-require_once 'src/model/Employee.php';
-require_once 'src/model/Account.php';
+require_once 'src/autoload.php';
+use Alura\Bank\Model\{CPF, Address, Person};
+use Alura\Bank\Model\Account\{Holder, Account, SavingsAccount, CurrentAccount};
+use Alura\Bank\Model\Employee\{Employee, Manager, Director, Developer, VideoEditor};
+use Alura\Bank\Service\{BonusController, Authenticator};
 
-$holder = new Holder(
-  'Jane Doe',
+$employee1 = new Director(
+  'Michael Scott',
   new CPF('123.456.789-10'),
-  new Address('NY', 'Brooklyn', 'Madison st.', '310')
+  new Address(
+    'NY',
+    'Brooklyn',
+    'Madison St.',
+    123
+  ),
+  4000
 );
-$account = new Account($holder);
-$account->deposit(18500);
+
+$authenticator = new Authenticator();
+$authenticator->tryLogin($employee1, '1234');
+
+$employees = [$employee1];
 
 ?>
 
@@ -23,14 +34,26 @@ $account->deposit(18500);
   </head>
   <body>
 
-    <hr> Name: <?= htmlentities($account->holder->getFullName()) ?> </hr>
-    <hr> Balance: $ <?= htmlentities($account->getBalance()) ?> </hr>
-    <hr> CPF: <?= htmlentities($account->holder->getCPF()) ?> </hr>
-    <hr> City: <?= htmlentities($account->holder->getCity()) ?> </hr>
-    <hr> Neighborhood: <?= htmlentities($account->holder->getNeighborhood()) ?> </hr>
-    <hr> Street: <?= htmlentities($account->holder->getStreet()) ?> </hr>
-    <hr> Number: <?= htmlentities($account->holder->getNumber()) ?> </hr>
-    <hr> ID: <?= Account::getActiveAccounts();  ?> </hr>
+    <div class="container">
+
+      <?php foreach ($employees as $employee)
+      { ?>
+
+        <div class="card">
+
+          <p> <?= $employee->getFullName() ?> </p>
+          <p> <?= $employee->getRole() ?> </p>
+          <ul>
+            <li>Salary: <?= $employee->getSalary(); ?> </li>
+            <li>Bonus: <?= $employee->calculateBonus(); ?> </li>
+            <li>CPF: <?= $employee->getCPF(); ?> </li>
+          </ul>
+
+        </div>
+
+    <?php  } ?>
+
+    </div>
 
   </body>
 </html>

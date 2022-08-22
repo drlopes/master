@@ -1,5 +1,7 @@
 <?php
 
+namespace Alura\Bank\Model;
+
 class Address
 {
   private string $city;
@@ -35,7 +37,7 @@ class Address
     return $this->street;
   }
 
-  public function getNumber():string
+  public function getHouseNumber():string
   {
     return $this->number;
   }

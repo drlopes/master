@@ -1,6 +1,10 @@
 <?php
 
-require_once 'Person.php';
+namespace Alura\Bank\Model\Account;
+
+use Alura\Bank\Model\Person;
+use Alura\Bank\Model\CPF;
+use Alura\Bank\Model\Address;
 
 class Holder extends Person
 {
