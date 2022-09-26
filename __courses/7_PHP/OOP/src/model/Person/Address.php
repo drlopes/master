@@ -1,13 +1,15 @@
 <?php
 
-namespace Alura\Bank\Model;
+namespace Alura\Bank\Model\Person;
+use Alura\Bank\Model\{getAttributes};
 
-class Address
+final class Address
 {
   private string $city;
   private string $neighborhood;
   private string $street;
   private string $number;
+  use getAttributes;
 
   public function __construct(
     string $city,
@@ -20,6 +22,13 @@ class Address
     $this->neighborhood = $neighborhood;
     $this->street = $street;
     $this->number = $number;
+  }
+
+  public function __toString():string
+  {
+    return '<br>' . "$this->street,
+    $this->number, $this->neighborhood,
+    $this->city" . '<br>';
   }
 
   public function getCity():string

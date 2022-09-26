@@ -2,7 +2,7 @@
 
 namespace Alura\Bank\Model\Employee;
 
-use Alura\Bank\Model\{Person, CPF, Address};
+use Alura\Bank\Model\Person\{Person, CPF, Address};
 
 abstract class Employee extends Person
 {

@@ -1,8 +1,8 @@
 <?php
 
-namespace Alura\Bank\Model;
+namespace Alura\Bank\Model\Person;
 
-class CPF
+final class CPF
 {
   private readonly string $CPF;
 
@@ -16,8 +16,7 @@ class CPF
     ]);
 
     if ($value === false) {
-      echo 'Invalid CPF';
-      exit();
+      throw new \InvalidArgumentException();
     } else {
       $this->cpf = $value;
     }

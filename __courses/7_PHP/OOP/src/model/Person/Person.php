@@ -1,6 +1,6 @@
 <?php
 
-namespace Alura\Bank\Model;
+namespace Alura\Bank\Model\Person;
 
 abstract class Person
 {
@@ -45,13 +45,12 @@ abstract class Person
     return $this->address->getHouseNumber();
   }
 
-  protected function validateName(string $name):string
+  final protected function validateName(string $name):string
   {
     if (strlen($name) > 5) {
       return $name;
     } else {
-      echo 'Name must be at least five characters long.';
-      exit();
+      throw new InvalidNameException($name);
     }
   }
 

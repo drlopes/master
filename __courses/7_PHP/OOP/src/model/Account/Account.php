@@ -1,6 +1,7 @@
 <?php
 
 namespace Alura\Bank\Model\Account;
+use Alura\Bank\Model\Account\{InsuficientFundsException};
 
 abstract class Account
 {
@@ -22,8 +23,7 @@ abstract class Account
   public function deposit(int|float $ammount):void
   {
     if ($ammount < 0) {
-      echo 'Must be a positive number.';
-      return;
+      throw new \InvalidArgumentException();
     }
     $this->balance += $ammount;
   }
@@ -32,10 +32,11 @@ abstract class Account
   {
     $tax = $ammount * $this->taxPercentual();
     $withdraw = $ammount + $tax;
+
     if ($withdraw > $this->balance) {
-      echo 'Not enough funds.';
-      return;
+      throw new InsuficientFundsException($withdraw, $this->balance);
     }
+
     $this->balance -= $withdraw;
   }
 
