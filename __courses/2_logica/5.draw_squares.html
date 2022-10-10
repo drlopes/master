@@ -1,5 +1,5 @@
 <canvas width = "380" height = "280">
-	
+
 </canvas>
 
 <script type="text/javascript">
@@ -7,7 +7,7 @@
 	//var series2015 = [50, 25, 20, 5];
 	//var series2016 = [65, 20, 13, 2];
 	//var colors = ['blue', 'green', 'yellow', 'red'];
-	drawScreen(10, 10, "green", "black", 380, 280);
+	drawScreen(10, 10, "green", "black", document.querySelector('canvas').width, document.querySelector('canvas').height);
 	//drawBarGraph(1, 30, series2015, colors, "Série 2015");
 	//drawBarGraph(160, 30, series2016, colors, "Série 2016");
 	//drawMultiplePixels(0, 0, 50, 50, "white", "black", 10);
@@ -36,7 +36,7 @@
 	}
 
 	function drawPixel(x, y, pixelWidth, pixelHeight, fillColor, strokeColor) {
-		
+
 		var canvas = document.querySelector("canvas");
 		var brush = canvas.getContext("2d");
 		brush.strokeStyle = strokeColor;
@@ -49,7 +49,7 @@
 
         var canvas = document.querySelector("canvas");
         var brush = canvas.getContext("2d");
-        brush.font = fontSize + "px " + fontName; 
+        brush.font = fontSize + "px " + fontName;
         brush.fillStyle = fontColor;
         brush.fillText(text, x, y);
         // Complete "x.font" format is "Xpx FONT" where X is an INT and FONT is the font's name
