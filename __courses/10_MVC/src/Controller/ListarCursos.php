@@ -11,7 +11,7 @@ class ListarCursos implements InterfaceControladorRequisicao
 
     public function __construct()
     {
-        $entityManager = (new EntityManagerCreator())->getEntityManager();
+        $entityManager = EntityManagerCreator::getEntityManager();
         $this->repositorioDeCursos = $entityManager->getRepository(Curso::class);
     }
 

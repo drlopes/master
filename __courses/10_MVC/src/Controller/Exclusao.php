@@ -2,10 +2,10 @@
 
 namespace Alura\Cursos\Controller;
 use Alura\Cursos\Infra\EntityManagerCreator;
-use Alura\Cursos\Entity\Curso;
 use Alura\Cursos\Controller\InterfaceControladorRequisicao;
+use Alura\Cursos\Entity\Curso;
 
-class Persistencia implements InterfaceControladorRequisicao
+class Exclusao implements InterfaceControladorRequisicao
 {
     private $entityManager;
 
@@ -16,20 +16,19 @@ class Persistencia implements InterfaceControladorRequisicao
 
     public function processaRequisicao(): void
     {
-        if ($_POST['descricao'] === "") {
+        $id = filter_input(
+            INPUT_GET,
+            'id',
+            FILTER_VALIDATE_INT
+        );
+
+        if (is_null($id) || $id === false) {
             header('Location: /cursos', true, 302);
             return;
         }
 
-        $descricao = filter_input(
-            INPUT_POST,
-            'descricao',
-            FILTER_SANITIZE_STRING
-        );
-
-        $curso = new Curso();
-        $curso->setDescricao($descricao);
-        $this->entityManager->persist($curso);
+        $course = $this->entityManager->getReference(Curso::class, $id);
+        $this->entityManager->remove($course);
         $this->entityManager->flush();
         header('Location: /cursos', true, 302);
     }

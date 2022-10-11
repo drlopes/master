@@ -2,23 +2,18 @@
 
 require __DIR__ . '/../vendor/autoload.php';
 
-use Alura\Cursos\Controller\{ListarCursos, FormularioInsercao};
+$routes = require __DIR__ . '/../config/routes.php';
 
 if (isset($_SERVER['PATH_INFO'])) {
-    switch ($_SERVER['PATH_INFO']) {
-        case '/cursos':
-            $controller = new ListarCursos();
-            $controller->processaRequisicao();
-            break;
 
-        case '/novo':
-            $controller = new FormularioInsercao();
-            $controller->processaRequisicao();
-            break;
+    $path = $_SERVER['PATH_INFO'];
 
-        default:
-            $path = $_SERVER['PATH_INFO'];
-            echo "Error 404: page \"$path\" not found or nonexistent.";
-            break;
+    if (!array_key_exists($path, $routes)) {
+        http_response_code(404);
+        exit();
     }
+
+    $controllerClassName = $routes[$path];
+    $controller = new $controllerClassName;
+    $controller->processaRequisicao();
 }
