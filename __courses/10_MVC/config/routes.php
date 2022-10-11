@@ -1,13 +1,17 @@
 <?php
 
-use Alura\Cursos\Controller\ListarCursos;
-use Alura\Cursos\Controller\FormularioInsercao;
-use Alura\Cursos\Controller\Persistencia;
-use Alura\Cursos\Controller\Exclusao;
+use Alura\Cursos\Controller\{
+    ListarCursos,
+    FormularioInsercao,
+    Persistencia,
+    Exclusao,
+    FormularioEdicao
+};
 
 return [
     '/cursos' => ListarCursos::class,
     '/novo' => FormularioInsercao::class,
     '/salvar-curso' => Persistencia::class,
-    '/excluir-curso' => Exclusao::class
+    '/excluir-curso' => Exclusao::class,
+    '/alterar-curso' => FormularioEdicao::class
 ];
