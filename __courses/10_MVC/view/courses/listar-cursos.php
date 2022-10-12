@@ -1,6 +1,6 @@
 <?php require __DIR__ . './../header-html.php'; ?>
 
-    <a href="/novo" class="btn btn-primary mb-2">Novo Curso</a>
+    <a href="/novo-curso" class="btn btn-primary mb-2">Novo Curso</a>
 
     <ul class="list-group">
         <?php foreach ($cursos as $curso): ?>
