@@ -13,6 +13,14 @@ if (isset($_SERVER['PATH_INFO'])) {
         exit();
     }
 
+    session_start();
+
+    $isLoginRoute = str_contains($path, 'login');
+    if (!isset($_SESSION['logado']) && !$isLoginRoute) {
+        header('Location: /login');
+        exit();
+    }
+
     $controllerClassName = $routes[$path];
     $controller = new $controllerClassName;
     $controller->processaRequisicao();

@@ -9,7 +9,7 @@ class FormularioInsercao extends ControllerComHtml implements InterfaceControlad
 {
     public function processaRequisicao(): void
     {
-        $this->renderizaHtml(
+        echo $this->renderizaHtml(
             'courses/formulario.php',
             [
                 'title' => 'Novo Curso'
