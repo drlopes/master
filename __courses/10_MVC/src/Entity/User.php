@@ -2,9 +2,9 @@
 namespace Alura\Cursos\Entity;
 /**
  * @Entity
- * @Table(name="usuarios")
+ * @Table(name="users")
  */
-class Usuario
+class User
 {
     /**
      * @Id
@@ -19,10 +19,10 @@ class Usuario
     /**
      * @Column(type="string")
      */
-    private $senha;
+    private $password;
 
-    public function senhaEstaCorreta(string $senhaPura): bool
+    public function passwordIsCorrect(string $rawPassword): bool
     {
-        return password_verify($senhaPura, $this->senha);
+        return password_verify($rawPassword, $this->password);
     }
 }

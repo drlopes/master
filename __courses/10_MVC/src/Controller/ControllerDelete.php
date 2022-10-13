@@ -2,10 +2,11 @@
 
 namespace Alura\Cursos\Controller;
 use Alura\Cursos\Infra\EntityManagerCreator;
-use Alura\Cursos\Controller\InterfaceControladorRequisicao;
-use Alura\Cursos\Entity\Curso;
+use Alura\Cursos\Controller\RequestControllerInterface;
+use Alura\Cursos\Entity\Course;
+use Alura\Cursos\Helper\FlashMessage;
 
-class Exclusao implements InterfaceControladorRequisicao
+class ControllerDelete implements RequestControllerInterface
 {
     private $entityManager;
 
@@ -14,7 +15,9 @@ class Exclusao implements InterfaceControladorRequisicao
         $this->entityManager = EntityManagerCreator::getEntityManager();
     }
 
-    public function processaRequisicao(): void
+    use FlashMessage;
+
+    public function parseRequest(): void
     {
         $id = filter_input(
             INPUT_GET,
@@ -23,13 +26,14 @@ class Exclusao implements InterfaceControladorRequisicao
         );
 
         if (is_null($id) || $id === false) {
-            header('Location: /cursos', true, 302);
+            header('Location: /list-courses', true, 302);
             return;
         }
 
-        $course = $this->entityManager->getReference(Curso::class, $id);
+        $course = $this->entityManager->getReference(Course::class, $id);
         $this->entityManager->remove($course);
         $this->entityManager->flush();
-        header('Location: /listar-cursos', true, 302);
+        $this->flashMessage('Course deleted', 'success');
+        header('Location: /list-courses', true, 302);
     }
 }

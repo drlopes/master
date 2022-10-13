@@ -2,9 +2,9 @@
 
 namespace Alura\Cursos\Controller;
 
-abstract class ControllerComHtml
+abstract class HtmlController
 {
-    public function renderizaHtml(string $path, array $data): string
+    public function renderHtml(string $path, array $data): string
     {
         extract($data);
         ob_start();

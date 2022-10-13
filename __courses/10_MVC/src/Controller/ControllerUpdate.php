@@ -2,19 +2,19 @@
 
 namespace Alura\Cursos\Controller;
 use Alura\Cursos\Infra\EntityManagerCreator;
-use Alura\Cursos\Entity\Curso;
+use Alura\Cursos\Entity\Course;
 
-class FormularioEdicao extends ControllerComHtml implements InterfaceControladorRequisicao
+class ControllerUpdate extends HtmlController implements RequestControllerInterface
 {
     private $entityManager;
-    private $courseRepository;
+    private $courseRepo;
 
     public function __construct()
     {
         $this->entityManager = EntityManagerCreator::getEntityManager();
-        $this->courseRepository = $this->entityManager->getRepository(Curso::class);
+        $this->courseRepo = $this->entityManager->getRepository(Course::class);
     }
-    public function processaRequisicao(): void
+    public function parseRequest(): void
     {
         $id = filter_input(
             INPUT_GET,
@@ -23,15 +23,15 @@ class FormularioEdicao extends ControllerComHtml implements InterfaceControlador
         );
 
         if (is_null($id) || $id === false) {
-            header('Location: /listar-cursos');
+            header('Location: /list-courses');
             return;
         }
 
-        $course = $this->courseRepository->find($id);
-        $title = "Alterar curso " . $course->getDescricao();
+        $course = $this->courseRepo->find($id);
+        $title = "Update course " . $course->getDescription();
 
-        echo $this->renderizaHtml(
-            'courses/formulario.php',
+        echo $this->renderHtml(
+            'courses/form.php',
             [
                 'title' => $title,
                 'course' => $course
