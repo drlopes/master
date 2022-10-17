@@ -1,10 +1,10 @@
 <?php
 
-require __DIR__ . '/../vendor/autoload.php';
-
-$routes = require __DIR__ . '/../config/routes.php';
-
 if (isset($_SERVER['PATH_INFO'])) {
+
+    require __DIR__ . '/../vendor/autoload.php';
+
+    $routes = require __DIR__ . '/../config/routes.php';
 
     $path = $_SERVER['PATH_INFO'];
 

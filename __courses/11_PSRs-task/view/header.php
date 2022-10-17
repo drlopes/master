@@ -7,7 +7,7 @@
 </head>
 <body>
     <?php if (!str_contains($_SERVER['PATH_INFO'], 'login')): ?>
-    <nav class="navbar navbar-dark bg-dark mb-2">
+    <nav class="navbar navbar-dark bg-dark mb-4">
         <a class="navbar-brand" href="/list-courses">Home</a>
         <ul class="navbar-nav ml-auto">
             <li class="nav-item active">
