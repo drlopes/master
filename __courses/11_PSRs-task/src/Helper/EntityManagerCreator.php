@@ -1,16 +1,16 @@
 <?php
 
-namespace Alura\Doctrine\Helper;
+namespace Alura\CRUD\Helper;
 use Doctrine\ORM\{EntityManager, ORMSetup};
 
 class EntityManagerCreator
 {
 
-    public static function createEntityManager(): EntityManager
+    public static function create(): EntityManager
     {
         $isDevMode = true;
         $config = ORMSetup::createAttributeMetadataConfiguration(
-            [__DIR__ . "/.."],
+            [__DIR__ . "/../Entity"],
             $isDevMode
         );
 

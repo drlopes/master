@@ -4,6 +4,7 @@ require __DIR__ . '/../vendor/autoload.php';
 
 use Nyholm\Psr7Server\ServerRequestCreator;
 use Nyholm\Psr7\Factory\Psr17Factory;
+use Psr\Http\Server\RequestHandlerInterface;
 
 $routes = require __DIR__ . '/../config/routes.php';
 
@@ -24,9 +25,9 @@ if (isset($_SERVER['PATH_INFO'])) {
         exit();
     }
 
-    $psr7Factory = new Psr17Factory();
+    $psr17Factory = new Psr17Factory();
 
-    $psr17Factory = new ServerRequestCreator(
+    $creator = new ServerRequestCreator(
         $psr17Factory, //ServerRequestFactory
         $psr17Factory, //UriFactory
         $psr17Factory, //UploadFileFactory
@@ -34,8 +35,16 @@ if (isset($_SERVER['PATH_INFO'])) {
     );
 
     $request = $creator->fromGlobals();
-
     $controllerClassName = $routes[$path];
-    $controller = new $controllerClassName;
-    $response = $controller->parseRequest($request);
+    $container = require __DIR__ . '/../config/dependencies.php';
+    $controller = $container->get($controllerClassName);
+    $response = $controller->handle($request);
+
+    foreach ($response->getHeaders() as $name => $values) {
+        foreach ($values as $value) {
+            header(sprintf('%s: %s', $name, $value), false);
+        }
+    }
+
+    echo $response->getBody();
 }
