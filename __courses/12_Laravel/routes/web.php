@@ -25,3 +25,11 @@ Route::get('/series',
 Route::get('/series/create',
     [SeriesController::class, 'create']
 );
+
+Route::post('/series/salvar',
+    [SeriesController::class, 'store']
+);
+
+Route::get('/series/destroy',
+    [SeriesController::class, 'destroy']
+);

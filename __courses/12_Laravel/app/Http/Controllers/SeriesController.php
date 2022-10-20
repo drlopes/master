@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class SeriesController extends Controller
 {
@@ -13,12 +14,7 @@ class SeriesController extends Controller
      */
     public function index(Request $request)
     {
-        $series = [
-            'House MD',
-            'Lost',
-            'Breaking Bad',
-            'Supernatural'
-        ];
+        $series = DB::select('SELECT * FROM series;');
 
         return view('series.index')->with('series', $series);
     }
@@ -41,7 +37,12 @@ class SeriesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $name = $request->input('name');
+        if (DB::insert('INSERT INTO series (name) VALUES (?)', [$name])) {
+            return 'ok';
+        } else {
+            return 'errror';
+        }
     }
 
     /**
@@ -86,6 +87,6 @@ class SeriesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        dd($id);
     }
 }
