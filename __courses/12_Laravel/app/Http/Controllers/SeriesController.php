@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Models\Serie;
 
 class SeriesController extends Controller
 {
@@ -14,9 +15,13 @@ class SeriesController extends Controller
      */
     public function index(Request $request)
     {
-        $series = DB::select('SELECT * FROM series;');
+        $series = Serie::query()->orderBy('name')->get();
 
-        return view('series.index')->with('series', $series);
+        $messageSuccess = session('message.success');
+
+        return view('series.index')
+            ->with('series', $series)
+            ->with('messageSuccess', $messageSuccess);
     }
 
     /**
@@ -37,12 +42,12 @@ class SeriesController extends Controller
      */
     public function store(Request $request)
     {
-        $name = $request->input('name');
-        if (DB::insert('INSERT INTO series (name) VALUES (?)', [$name])) {
-            return 'ok';
-        } else {
-            return 'errror';
-        }
+        $series = Serie::create($request->all());
+
+        $messageSuccess = $request->session()->flash('message.success', "Seires \"{$series->name}\" created successfully");
+
+        return to_route('series.index')
+            ->with('messageSuccess', $messageSuccess);
     }
 
     /**
@@ -85,8 +90,10 @@ class SeriesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        dd($id);
+        Serie::destroy($request->series);
+        $request->session()->flash('message.success', "Series \"{$request->series}\" removed successfully");
+        return to_route('series.index');
     }
 }
