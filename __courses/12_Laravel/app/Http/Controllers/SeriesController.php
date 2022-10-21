@@ -44,10 +44,9 @@ class SeriesController extends Controller
     {
         $series = Serie::create($request->all());
 
-        $messageSuccess = $request->session()->flash('message.success', "Seires \"{$series->name}\" created successfully");
+        $messageSuccess = "Series \"{$series->name}\" created successfully";
 
-        return to_route('series.index')
-            ->with('messageSuccess', $messageSuccess);
+        return to_route('series.index')->with('message.success', $messageSuccess);
     }
 
     /**
@@ -79,21 +78,32 @@ class SeriesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Serie $series)
     {
-        //
+        return view('series.create')->with(['seriesName' => $series->name]);
     }
 
     /**
      * Remove the specified resource from storage.
      *
+     * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request)
+    public function destroy(Serie $series, Request $request)
     {
-        Serie::destroy($request->series);
-        $request->session()->flash('message.success', "Series \"{$request->series}\" removed successfully");
-        return to_route('series.index');
+        $messageType = '';
+        $message = '';
+        $isDeleted = $series->delete();
+
+        if ($isDeleted) {
+            $messageType = 'message.success';
+            $message = "Series \"{$series->name}\" removed successfully";
+        } else {
+            $messageType = 'message.error';
+            $message = "Series \"{$series->name}\" was not removed";
+        }
+
+        return to_route('series.index')->with($messageType, $message);
     }
 }
