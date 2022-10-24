@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Serie;
+use App\Http\Requests\SeriesFormRequest;
+
+use function PHPUnit\Framework\returnSelf;
 
 class SeriesController extends Controller
 {
@@ -40,13 +43,14 @@ class SeriesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(SeriesFormRequest $request)
     {
         $series = Serie::create($request->all());
 
-        $messageSuccess = "Series \"{$series->name}\" created successfully";
+        $messageType = 'message.success';
+        $message = "Series '{$series->name}' created successfully";
 
-        return to_route('series.index')->with('message.success', $messageSuccess);
+        return to_route('series.index')->with($messageType, $message);
     }
 
     /**
@@ -66,9 +70,9 @@ class SeriesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Serie $series)
     {
-        //
+        return view('series.edit')->with('series', $series);
     }
 
     /**
@@ -78,9 +82,14 @@ class SeriesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Serie $series)
+    public function update(SeriesFormRequest $request, Serie $series)
     {
-        return view('series.create')->with(['seriesName' => $series->name]);
+        $series->fill($request->all());
+        $series->save();
+        $messageType = 'message.success';
+        $message = "Series '{$series->name}' updated";
+
+        return to_route('series.index')->with($messageType, $message);
     }
 
     /**
@@ -90,7 +99,7 @@ class SeriesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Serie $series, Request $request)
+    public function destroy(Serie $series)
     {
         $messageType = '';
         $message = '';
