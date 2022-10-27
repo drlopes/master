@@ -3,9 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use App\Models\Serie;
+use App\Models\Series;
 use App\Http\Requests\SeriesFormRequest;
+use App\Models\Episode;
+use App\Models\Season;
 
 use function PHPUnit\Framework\returnSelf;
 
@@ -18,7 +19,7 @@ class SeriesController extends Controller
      */
     public function index(Request $request)
     {
-        $series = Serie::query()->orderBy('name')->get();
+        $series = Series::all();
 
         $messageSuccess = session('message.success');
 
@@ -41,22 +42,46 @@ class SeriesController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
+     * 
      * @return \Illuminate\Http\Response
      */
     public function store(SeriesFormRequest $request)
     {
-        $series = Serie::create($request->all());
+        $series = Series::create($request->all());
+
+        $seasons = [];
+        for ($i = 1; $i <= $request->seasons; $i++) { 
+            $seasons[] = [
+                'series_id' => $series->id,
+                'number' => $i
+            ];
+        }
+
+        Season::insert($seasons);
+
+        $episodes = [];
+        foreach ($series->seasons as $season) {
+            for ($j = 1; $j <= $request->episodes; $j++) {
+                $episodes[] = [
+                    'season_id' => $season->id,
+                    'number' => $j
+                ];
+            }
+        }
+
+        Episode::insert($episodes);
 
         $messageType = 'message.success';
         $message = "Series '{$series->name}' created successfully";
 
-        return to_route('series.index')->with($messageType, $message);
+        return to_route('series.index', [], 302)->with($messageType, $message);
     }
 
     /**
      * Display the specified resource.
      *
      * @param  int  $id
+     * 
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -68,9 +93,10 @@ class SeriesController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
+     * 
      * @return \Illuminate\Http\Response
      */
-    public function edit(Serie $series)
+    public function edit(Series $series)
     {
         return view('series.edit')->with('series', $series);
     }
@@ -82,7 +108,7 @@ class SeriesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(SeriesFormRequest $request, Serie $series)
+    public function update(SeriesFormRequest $request, Series $series)
     {
         $series->fill($request->all());
         $series->save();
@@ -96,10 +122,12 @@ class SeriesController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  \Illuminate\Http\Request  $request
+     * 
      * @param  int  $id
+     * 
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Serie $series)
+    public function destroy(Series $series)
     {
         $messageType = '';
         $message = '';

@@ -8,7 +8,9 @@
     <ul class="list-group">
         @foreach($series as $serie)
         <li class="list-group-item d-flex justify-content-between align-items-center">
-            <span> {{ $serie->name }} </span>
+            <a href="{{ route('seasons.index', ['series' => $serie, 'seriesName' => $serie->name]) }}"> 
+                {{ $serie->name }} 
+            </a>
             <div class="d-flex gap-1">
                 <a href="{{ route('series.edit', $serie->id) }}" class="btn btn-primary btn-sm">
                   <span>Edit</span>
