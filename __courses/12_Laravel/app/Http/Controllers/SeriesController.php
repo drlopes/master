@@ -2,16 +2,22 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\SeriesCreated;
 use Illuminate\Http\Request;
-use App\Models\Series;
 use App\Http\Requests\SeriesFormRequest;
-use App\Models\Episode;
-use App\Models\Season;
+use App\Models\Series;
+use App\Repositories\SeriesRepository;
 
 use function PHPUnit\Framework\returnSelf;
 
 class SeriesController extends Controller
 {
+    public function __construct(
+        protected SeriesRepository $repository
+    ) {
+        $this->middleware('auth')->except('index');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -47,33 +53,15 @@ class SeriesController extends Controller
      */
     public function store(SeriesFormRequest $request)
     {
-        $series = Series::create($request->all());
-
-        $seasons = [];
-        for ($i = 1; $i <= $request->seasons; $i++) { 
-            $seasons[] = [
-                'series_id' => $series->id,
-                'number' => $i
-            ];
-        }
-
-        Season::insert($seasons);
-
-        $episodes = [];
-        foreach ($series->seasons as $season) {
-            for ($j = 1; $j <= $request->episodes; $j++) {
-                $episodes[] = [
-                    'season_id' => $season->id,
-                    'number' => $j
-                ];
-            }
-        }
-
-        Episode::insert($episodes);
-
+        $series = $this->repository->add($request);
+        SeriesCreated::dispatch(
+            $series->id,
+            $request->name,
+            $request->seasons,
+            $request->episodes
+        );
         $messageType = 'message.success';
         $message = "Series '{$series->name}' created successfully";
-
         return to_route('series.index', [], 302)->with($messageType, $message);
     }
 

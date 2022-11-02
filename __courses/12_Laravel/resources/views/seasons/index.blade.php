@@ -1,12 +1,14 @@
-<x-layout title="{{ $_GET['seriesName'] }}'s Seasons">
+<x-layout title="{{ $_GET['name'] }}">
 
     <ul class="list-group">
 
         @foreach($seasons as $season)
             <li class="list-group-item d-flex justify-content-between align-items-center">
-                <span> Season {{ $season->number }} </span>
-                <div class="badge bg-secondary">
-                    <span>{{ $season->episodes->count() }}</span>
+                <a href="{{ route('episodes.index', ['season' => $season, 'name' => $_GET['name']]) }}">
+                    <span> Season {{ $season->number }} </span>
+                </a>
+                <div class="badge bg-primary">
+                    <span>{{ $season->numberOfWhatchedEpisodes() }} / {{ $season->episodes->count() }}</span>
                 </div>
             </li>
         @endforeach
