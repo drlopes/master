@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\SeriesController;
 use App\Mail\SeriesCreated;
 use Illuminate\Support\Facades\Route;
 
@@ -15,8 +16,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [AuthenticatedSessionController::class, 'create'])
-    ->name('login');
+Route::get('/', [SeriesController::class, 'index'])
+    ->name('series.index');
 
 Route::get('/dashboard', function () {
     return view('dashboard');

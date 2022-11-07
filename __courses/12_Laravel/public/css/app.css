@@ -10770,3 +10770,41 @@ textarea.form-control-lg {
     display: none !important;
   }
 }
+
+.my-link {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+
+.my-card-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 300px));
+  grid-auto-rows: 400px;
+  grid-gap: 4rem 2rem;
+  list-style: none;
+  padding: 0;
+}
+
+.my-card {
+  display: flex;
+  align-items: center;
+  gap: 1em;
+  padding: 1em;
+  flex-direction: column;
+  border-radius: 10px;
+  box-shadow: 0 0 50px black inset;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 100% 100%;
+  position: relative;
+  transition: all 325ms;
+}
+
+.my-card:hover {
+  background-size: 108% 108%;
+  opacity: 0.9;
+}

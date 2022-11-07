@@ -6,7 +6,7 @@
         <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     </head>
     <body>
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-3" style="color: white; height: 56px;" >
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-5" style="color: white; height: 56px;" >
             <div class="container-fluid">
                 <div>
                     <a href="{{ route('series.index') }}" class="navbar-brand">HOME</a>
@@ -14,7 +14,10 @@
                 @guest
                     @if ($title != 'login')
                         <span class="navbar-brand">{{ strtoupper($title); }}</span>
-                        <a href="{{ route('login') }}" class="btn btn-primary btn-sm" class="login">Login</a>
+                        <div>
+                            <a href="{{ route('login') }}" class="btn btn-primary btn-sm" class="login">Login</a>
+                            <a href="{{ route('register') }}" class="btn btn-secondary btn-sm" class="register">Register</a>
+                        </div>
                     @endif
                 @endguest
                 @auth
