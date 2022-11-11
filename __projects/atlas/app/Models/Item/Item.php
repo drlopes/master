@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\Item;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -42,7 +42,7 @@ class Item extends Model
     }
 
     /**
-     *
+     * DONE
      */
     public function applications()
     {
@@ -50,7 +50,7 @@ class Item extends Model
     }
 
     /**
-     *
+     * DONE
      */
     public function guardians()
     {
@@ -58,7 +58,7 @@ class Item extends Model
     }
 
     /**
-     *
+     * DONE
      */
     public function handlers()
     {
@@ -66,7 +66,7 @@ class Item extends Model
     }
 
     /**
-     *
+     * DONE 
      */
     public function departments()
     {
@@ -74,7 +74,7 @@ class Item extends Model
     }
 
     /**
-     *
+     * MM
      */
     public function locations()
     {
@@ -82,7 +82,7 @@ class Item extends Model
     }
 
     /**
-     *
+     * MM
      */
     public function processes()
     {
@@ -90,7 +90,7 @@ class Item extends Model
     }
 
     /**
-     *
+     * MM
      */
     public function statuses()
     {
@@ -98,10 +98,18 @@ class Item extends Model
     }
 
     /**
-     *
+     * DONE
      */
     public function providers()
     {
         return $this->belongsToMany(ItemProvider::class, 'item_provider');
+    }
+
+    /**
+     * DONE
+     */
+    public function serial()
+    {
+        return $this->hasOne(ItemSerial::class);
     }
 }
