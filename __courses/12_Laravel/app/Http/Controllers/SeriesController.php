@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Events\SeriesCreated as SeriesCreatedEvent;
-use App\Events\SeriesDeletedEvent;
 use Illuminate\Http\Request;
 use App\Http\Requests\SeriesFormRequest;
 use App\Jobs\DeleteSeriesCover;
@@ -27,7 +26,8 @@ class SeriesController extends Controller
      */
     public function index(Request $request)
     {
-        $series = Series::all();
+        $series = Series::paginate(3);
+        // dd($series);
 
         $messageSuccess = session('message.success');
 

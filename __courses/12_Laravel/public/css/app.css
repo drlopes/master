@@ -10784,6 +10784,7 @@ textarea.form-control-lg {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 300px));
   grid-auto-rows: 400px;
+  justify-content: center;
   grid-gap: 4rem 2rem;
   list-style: none;
   padding: 0;
@@ -10802,9 +10803,14 @@ textarea.form-control-lg {
   background-size: 100% 100%;
   position: relative;
   transition: all 325ms;
+  position: relative;
 }
 
 .my-card:hover {
   background-size: 108% 108%;
   opacity: 0.9;
+}
+
+body {
+  background-color: #BCC;
 }

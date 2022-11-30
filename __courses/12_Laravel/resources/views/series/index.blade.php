@@ -6,7 +6,13 @@
     <ul class="my-card-container">
 
         @foreach($series as $serie)
-        <li class="my-card" style="background-image: url('{{ asset('storage/' . $serie->cover_path) }}');">
+        <li class="my-card" 
+            @if (file_exists('storage/' .$serie->cover_path) == false || $serie->cover_path == null)
+                style="background-image: url('{{ asset('storage/no_image_available.jpeg') }}');"
+            @else
+                style="background-image: url('{{ asset('storage/' . $serie->cover_path) }}');"
+            @endif
+            >
 
             @auth
                 <div class="d-flex gap-1" style="position: absolute; top: 102%">
@@ -31,5 +37,14 @@
         </li>
         @endforeach
     </ul>
+    <nav style="display: block; position: absolute;">
+        <ul style="display: flex; width: 100%;">
+            @if ($series->hasPages())
+                @foreach ($series->items() as $item)
+                    {{ $series->getOptions(); }}
+                @endforeach
+            @endif
+        </ul>
+    </nav>
 
 </x-layout>

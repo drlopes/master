@@ -25,7 +25,7 @@ class SeriesFormRequest extends FormRequest
     {
         return [
             'name' => ['required', 'min:3', 'unique:series'],
-            'cover' => ['required', 'image'],
+            //'cover' => ['required', 'image',],
             'seasons' => ['required', 'integer'],
             'episodes' => ['required', 'integer']
         ];

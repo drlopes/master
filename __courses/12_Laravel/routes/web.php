@@ -23,8 +23,4 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::get('/email', function () {
-    return new SeriesCreated(1, 'Lost', 8, 13);
-});
-
 require __DIR__.'/auth.php';
