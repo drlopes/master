@@ -23,7 +23,7 @@ class AvaliadorTest extends TestCase
      * @dataProvider leilaoComLancesEmOrdemDecrescente
      * @dataProvider leilaoComLancesEmOrdemCrescente
      */
-    public function testAvaliadorDeveAcharMaiorValor(Leilao $leilao)
+    public function test_Avaliador_Deve_Achar_Maior_Valor(Leilao $leilao)
     {
         $this->avaliador->avalia($leilao);
 
@@ -35,7 +35,7 @@ class AvaliadorTest extends TestCase
      * @dataProvider leilaoComLancesEmOrdemDecrescente
      * @dataProvider leilaoComLancesEmOrdemCrescente
      */
-    public function testAvaliadorDeveAcharMenorValor(Leilao $leilao)
+    public function test_Avaliador_Deve_Achar_Menor_Valor(Leilao $leilao)
     {
         $this->avaliador->avalia($leilao);
 
@@ -47,7 +47,7 @@ class AvaliadorTest extends TestCase
      * @dataProvider leilaoComLancesEmOrdemDecrescente
      * @dataProvider leilaoComLancesEmOrdemCrescente
      */
-    public function testAvaliadorDeveOrdenarOs3Lances(Leilao $leilao)
+    public function test_Avaliador_Deve_Ordenar_Os_3_Lances(Leilao $leilao)
     {
         $this->avaliador->avalia($leilao);
 
@@ -59,7 +59,7 @@ class AvaliadorTest extends TestCase
         static::assertEquals(1000, $lances[2]->getValor());
     }
 
-    public function testAvaliadorDeveRetornarOsMaioresLancesDisponiveis()
+    public function test_Avaliador_Deve_Retornar_Os_Maiores_Lances_Disponiveis()
     {
         $leilao = new Leilao('Fiat 147 0KM');
 

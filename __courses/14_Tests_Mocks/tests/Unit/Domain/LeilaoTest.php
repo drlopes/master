@@ -10,7 +10,7 @@ use PHPUnit\Framework\TestCase;
 
 class LeilaoTest extends TestCase
 {
-    public function testProporLanceEmLeilaoFinalizadoDeveLancarExcecao()
+    public function test_Propor_Lance_Em_Leilao_Finalizado_Deve_Lancar_Excecao()
     {
         $this->expectException(DomainException::class);
         $this->expectExceptionMessage('Este leilão já está finalizado');
@@ -26,7 +26,7 @@ class LeilaoTest extends TestCase
      * @param Lance[] $lances
      * @dataProvider dadosParaProporLances
      */
-    public function testProporLancesEmLeilaoDeveFuncionar(int $qtdEsperado, array $lances)
+    public function test_Propor_Lances_Em_Leilao_Deve_Funcionar(int $qtdEsperado, array $lances)
     {
         $leilao = new Leilao('Fiat 147 0KM');
         foreach ($lances as $lance) {
@@ -36,7 +36,7 @@ class LeilaoTest extends TestCase
         static::assertCount($qtdEsperado, $leilao->getLances());
     }
 
-    public function testMesmoUsuarioNaoPodeProporDoisLancesSeguidos()
+    public function test_Mesmo_Usuario_Nao_Pode_Propor_Dois_Lances_Seguidos()
     {
         $this->expectException(DomainException::class);
         $this->expectExceptionMessage('Usuário já deu o último lance');

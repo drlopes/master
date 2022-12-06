@@ -43,7 +43,7 @@ class EncerradorTest extends TestCase
         $this->encerrador = new Encerrador($leilaoDAO, $this->enviadorEmail);
     }
 
-    public function testLeiloesComMaisDeUmaSemanaDevemSerEncerrados()
+    public function test_Leiloes_Com_Mais_De_Uma_Semana_Devem_Ser_Encerrados()
     {
         $this->encerrador->encerra();
 
@@ -54,7 +54,7 @@ class EncerradorTest extends TestCase
         self::assertTrue($leiloesFinalizados[1]->estaFinalizado());
     }
 
-    public function testEncerramentoDeveContinuarMesmoSeNotificacaoPorEmailFalhar () 
+    public function test_Encerramento_Deve_Continuar_Mesmo_Se_Notificacao_Por_Email_Falhar () 
     {
         $exception = new \DomainException('Erro ao enviar email');
         $this->enviadorEmail->expects($this->exactly(2))
@@ -64,7 +64,7 @@ class EncerradorTest extends TestCase
         $this->encerrador->encerra();
     }
 
-    public function testSoDeveEnvarLeilaoPorEmailAposFinalizado () 
+    public function test_So_Deve_Envar_Leilao_Por_Email_Apos_Finalizado () 
     {
         $this->enviadorEmail->expects($this->exactly(2))
             ->method('notificarTerminoLeilao')
