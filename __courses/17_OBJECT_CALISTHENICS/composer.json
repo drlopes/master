@@ -11,6 +11,7 @@
     },
     "require": {
         "ext-ds": "*",
-        "phpunit/phpunit": "^9"
+        "phpunit/phpunit": "^9",
+        "php-ds/php-ds": "^1.4"
     }
 }
